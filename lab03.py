@@ -1,3 +1,4 @@
+import os
 import random
 
 
@@ -163,10 +164,30 @@ def task6():
 
 
 
+def task7():
+    file_path = "directory.txt"
 
+    # Чтение исходного файла и запись путей в массив строк
+    with open(file_path, "r") as file:
+        paths = [line.strip() for line in file.readlines()]
+
+    # Создание структуры директорий и файлов
+    for path in paths:
+        # Получение директории и имени файла
+        folder, file_name = os.path.split(path)
+
+        # Создание директории (если не существует)
+        if folder and not os.path.exists(folder):
+            os.makedirs(folder)
+
+        # Создание файла
+        with open(path, "w") as new_file:
+            new_file.write(f"Contens of {file_name}")
+
+    print("Файловая структура успешно создана.")
 
 
 if __name__ == "__main__":
     # array = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     # print_char_2d_array(array)
-    task6()
+    task7()
